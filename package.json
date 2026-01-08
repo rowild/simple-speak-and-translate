@@ -1,0 +1,32 @@
+{
+  "name": "speak-and-translate-simple",
+  "version": "0.6.0",
+  "description": "A small app that transcribes and translates spoken audio to text using Mistal's Voxtral. Google's Text-to-Speech API is used to speak the translated text.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "Robert Wildling <robertwildling@gmail.com> (https://rowild.at/)",
+  "license": "GNU GPL",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "dexie": "^4.2.1",
+    "gsap": "^3.13.0",
+    "lucide-vue-next": "^0.554.0",
+    "pinia": "^3.0.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4",
+    "vite-plugin-pwa": "^1.1.0",
+    "vue": "^3.5.25",
+    "vue-tsc": "^3.1.5",
+    "wavesurfer.js": "^7.11.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
+  }
+}
