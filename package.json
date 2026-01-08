@@ -12,6 +12,7 @@
   "author": "Robert Wildling <robertwildling@gmail.com> (https://rowild.at/)",
   "license": "GNU GPL",
   "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.29.0",
     "@tailwindcss/vite": "^4.1.18",
     "@vitejs/plugin-vue": "^6.0.2",
     "dexie": "^4.2.1",
