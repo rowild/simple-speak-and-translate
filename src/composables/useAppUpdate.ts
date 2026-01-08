@@ -51,6 +51,8 @@ export function useAppUpdate() {
   const currentVersion = __APP_VERSION__;
 
   function applyUpdate() {
+    // Hide the banner immediately
+    showUpdateBanner.value = false;
     // Set flag so we know not to show banner after reload
     sessionStorage.setItem(UPDATE_APPLIED_KEY, "true");
     // This tells the waiting SW to skipWaiting and take control
