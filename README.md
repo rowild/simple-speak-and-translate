@@ -7,7 +7,10 @@ A speech-to-speech translation Progressive Web App (PWA) built with Vue 3 and Vi
 - Voice recording with real-time audio visualization
 - Automatic transcription via Voxtral API
 - Translation to 35+ languages
-- Text-to-speech playback (Browser & Google TTS)
+- Text-to-speech playback with three options:
+  - **Google Cloud TTS** (Neural2, WaveNet, Chirp3-HD models)
+  - **ElevenLabs TTS** (Multilingual v2, Turbo, Flash models)
+  - **Browser TTS** (uses device's native voices)
 - Conversation history stored locally (IndexedDB)
 - PWA support for offline-capable installation
 - Automatic update detection with user-controlled updates
@@ -28,7 +31,8 @@ A speech-to-speech translation Progressive Web App (PWA) built with Vue 3 and Vi
 ## Requirements
 
 - **Node.js**: v22.x or higher
-- **Google Cloud API Key**: Required for Text-to-Speech functionality
+- **Google Cloud API Key**: Required for Google Text-to-Speech
+- **ElevenLabs API Key**: Required for ElevenLabs Text-to-Speech (optional)
 
 ## Setup
 
@@ -48,9 +52,10 @@ A speech-to-speech translation Progressive Web App (PWA) built with Vue 3 and Vi
    Create a `.env` file in the project root:
    ```env
    GOOGLE_CLOUD_API_KEY=your_google_cloud_api_key_here
+   ELEVENLABS_API_KEY=your_elevenlabs_api_key_here
    ```
 
-   The Google Cloud API key is used for Text-to-Speech synthesis via the local development proxy.
+   API keys are used via local development proxy to keep them secure.
 
 4. **Start the development server**
    ```bash

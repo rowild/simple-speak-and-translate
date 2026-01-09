@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-01-09
+
+### Added
+- **ElevenLabs TTS Integration**: New third TTS option alongside Google and Browser
+  - API proxy endpoint (`api/elevenlabs-tts.ts`) and Vite dev middleware
+  - `useElevenLabsTTS` composable mirroring Google TTS pattern
+  - `ElevenLabsTTSButton` component with purple gradient styling
+  - Voice selector modal with gender categorization
+  - Model selector: Multilingual v2, Turbo v2.5, Flash v2.5
+- **Google TTS Model Selector**: Voice selector now groups by model type
+  - Tabs for Chirp3-HD, Neural2, Studio, WaveNet, Standard, and more
+  - Voices filtered by selected model, then grouped by gender
+- Updated `.env.example` with `ELEVENLABS_API_KEY` placeholder
+
+### Changed
+- TTS buttons now show in order: Google | 11Labs | Browser
+- Google voice names simplified to show just the variant letter (e.g., "A", "B")
+
 ## [0.3.1] - 2026-01-08
 
 ### Added

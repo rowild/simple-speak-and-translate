@@ -176,7 +176,7 @@ onUnmounted(() => {
         class="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm"
         @click.self="showVoiceSelector = false"
       >
-        <div class="w-full max-w-[480px] mx-4 bg-zinc-900/95 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl max-h-[80vh] overflow-y-auto">
+        <div class="w-full max-w-120 mx-4 bg-zinc-900/95 backdrop-blur-xl border border-white/20 rounded-xl p-4 shadow-2xl max-h-[80vh] overflow-y-auto">
           <div class="flex justify-between items-center mb-4 pb-3 border-b border-white/10">
             <h3 class="text-white font-semibold text-base">Select Browser Voice</h3>
             <button 

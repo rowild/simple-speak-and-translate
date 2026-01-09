@@ -10,6 +10,7 @@ import AudioPlayer from '../components/AudioPlayer.vue';
 import RecordingVisualizer from '../components/RecordingVisualizer.vue';
 import TextToSpeech from '../components/TextToSpeech.vue';
 import GoogleTTSButton from '../components/GoogleTTSButton.vue';
+import ElevenLabsTTSButton from '../components/ElevenLabsTTSButton.vue';
 import { languages, type Language } from '../config/languages';
 import { Trash2, Plus, Mic, Square, Info, X, Download } from 'lucide-vue-next';
 
@@ -459,6 +460,10 @@ const handleDeleteAll = () => {
                     <div class="tts-option">Google</div>
                     <GoogleTTSButton :text="pair.translatedText" :lang="pair.outputLang.code" />
                   </div>
+                  <div class="tts-label">
+                    <div class="tts-option">11Labs</div>
+                    <ElevenLabsTTSButton :text="pair.translatedText" :lang="pair.outputLang.code" />
+                  </div>
                   <div class="tts-label right">
                     <div class="tts-option">Browser</div>
                     <TextToSpeech :text="pair.translatedText" :lang="pair.outputLang.speechCode" />
@@ -544,6 +549,10 @@ const handleDeleteAll = () => {
                   <div class="tts-option">Google</div>
                   <GoogleTTSButton v-if="currentTranslationOutputLang" :text="store.currentTranslatedText" :lang="currentTranslationOutputLang.code" />
                 </div>
+                <div class="tts-label">
+                  <div class="tts-option">11Labs</div>
+                  <ElevenLabsTTSButton v-if="currentTranslationOutputLang" :text="store.currentTranslatedText" :lang="currentTranslationOutputLang.code" />
+                </div>
                 <div class="tts-label right">
                   <div class="tts-option">Browser</div>
                   <TextToSpeech v-if="currentTranslationOutputLang" :text="store.currentTranslatedText" :lang="currentTranslationOutputLang.speechCode" />
@@ -591,7 +600,7 @@ const handleDeleteAll = () => {
         class="fixed inset-0 z-9999 flex items-center justify-center bg-black/60 backdrop-blur-sm"
         @click.self="showDeleteAllModal = false"
       >
-        <div class="w-full max-w-[360px] mx-4 bg-zinc-900/95 backdrop-blur-xl border border-white/20 rounded-xl p-5 shadow-2xl">
+        <div class="w-full max-w-90 mx-4 bg-zinc-900/95 backdrop-blur-xl border border-white/20 rounded-xl p-5 shadow-2xl">
           <p class="text-white text-center mb-6 text-base leading-relaxed">
             {{ uiText.deleteAllConfirm }}
           </p>

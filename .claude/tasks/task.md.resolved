@@ -1,0 +1,15 @@
+# ElevenLabs TTS Integration
+
+## Tasks
+
+- [x] Create implementation plan
+- [x] Create API proxy (`api/elevenlabs-tts.ts`)
+- [x] Create composable (`useElevenLabsTTS.ts`)
+- [x] Create button component (`ElevenLabsTTSButton.vue`)
+- [x] Update MainView.vue to include ElevenLabs button
+- [x] Update `.env.example`
+- [x] Test voice fetching and playback
+- [x] Verify button positioning (Google | 11Labs | Browser)
+- [x] Add model selector to ElevenLabs (Multilingual/Turbo/English)
+- [x] Add model grouping to Google TTS (Neural2/WaveNet/Standard)
+- [ ] Manual verification of new model selectors

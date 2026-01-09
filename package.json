@@ -1,7 +1,7 @@
 {
   "name": "speak-and-translate-simple",
-  "version": "0.6.4",
-  "description": "A small app that transcribes and translates spoken audio to text using Mistal's Voxtral. Google's Text-to-Speech API is used to speak the translated text.",
+  "version": "0.7.0",
+  "description": "A speech translation PWA using Voxtral for transcription and multiple TTS options (Google, ElevenLabs, Browser) for playback.",
   "type": "module",
   "scripts": {
     "dev": "vite",
