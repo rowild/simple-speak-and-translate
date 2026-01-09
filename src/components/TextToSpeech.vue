@@ -12,26 +12,55 @@ const showVoiceSelector = ref(false);
 const availableVoices = ref<SpeechSynthesisVoice[]>([]);
 const selectedVoiceURI = ref<string>('');
 
+// Track previous voice count to detect when voices finish loading
+let lastVoiceCount = 0;
+let voiceLoadRetryCount = 0;
+let voiceLoadTimer: ReturnType<typeof setTimeout> | null = null;
+
 // Load available voices for the current language
 const loadVoices = () => {
   const voices = speechSynthesis.getVoices();
   console.log('All voices:', voices.length);
+
   // Filter voices for current language (match by language code prefix)
   const langPrefix = props.lang.split('-')[0];
-  availableVoices.value = voices.filter(voice =>
+  const filteredVoices = voices.filter(voice =>
     voice.lang.toLowerCase().startsWith(langPrefix.toLowerCase())
   );
+
+  // Only update if we got more voices or this is the first load
+  if (filteredVoices.length > 0 || availableVoices.value.length === 0) {
+    availableVoices.value = filteredVoices;
+  }
+
   console.log(`Voices for ${props.lang}:`, availableVoices.value.length, availableVoices.value.map(v => v.name));
 
   // Load saved voice preference from localStorage
   const savedVoiceURI = localStorage.getItem(`tts-voice-${props.lang}`);
   if (savedVoiceURI && availableVoices.value.some(v => v.voiceURI === savedVoiceURI)) {
     selectedVoiceURI.value = savedVoiceURI;
-  } else if (availableVoices.value.length > 0) {
-    // Default to first available voice
+  } else if (availableVoices.value.length > 0 && !selectedVoiceURI.value) {
+    // Default to first available voice only if none selected
     selectedVoiceURI.value = availableVoices.value[0].voiceURI;
   }
   console.log('Selected voice URI:', selectedVoiceURI.value);
+
+  // If voices changed or we have no voices yet, schedule a retry
+  // This handles browsers where voices load asynchronously in batches
+  if (voices.length !== lastVoiceCount && voiceLoadRetryCount < 5) {
+    lastVoiceCount = voices.length;
+    voiceLoadRetryCount++;
+    if (voiceLoadTimer) clearTimeout(voiceLoadTimer);
+    voiceLoadTimer = setTimeout(loadVoices, 200);
+  }
+};
+
+// Reset retry count when language changes
+const resetVoiceLoading = () => {
+  voiceLoadRetryCount = 0;
+  lastVoiceCount = 0;
+  if (voiceLoadTimer) clearTimeout(voiceLoadTimer);
+  loadVoices();
 };
 
 // Categorize voices by gender (heuristic based on name)
@@ -131,26 +160,33 @@ const toggleSpeech = () => {
 
 // Watch for language changes to reload voices
 watch(() => props.lang, () => {
-  loadVoices();
+  resetVoiceLoading();
 });
+
+// Voice change handler for addEventListener
+const handleVoicesChanged = () => {
+  loadVoices();
+};
 
 onMounted(() => {
   // Load voices on mount
   loadVoices();
 
-  // Some browsers need this event to load voices
-  if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = loadVoices;
-  }
+  // Use addEventListener for better browser compatibility
+  // This is more reliable than setting onvoiceschanged directly
+  speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
 });
 
 onUnmounted(() => {
   speechSynthesis.cancel();
 
-  // Clean up event listener
-  if (speechSynthesis.onvoiceschanged !== undefined) {
-    speechSynthesis.onvoiceschanged = null;
+  // Clean up timer
+  if (voiceLoadTimer) {
+    clearTimeout(voiceLoadTimer);
   }
+
+  // Clean up event listener
+  speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
 });
 </script>
 

@@ -1,6 +1,6 @@
 {
   "name": "speak-and-translate-simple",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A speech translation PWA using Voxtral for transcription and multiple TTS options (Google, ElevenLabs, Browser) for playback.",
   "type": "module",
   "scripts": {
