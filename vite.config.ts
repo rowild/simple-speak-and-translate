@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 import path from 'path'
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import tailwindcss from '@tailwindcss/vite'
 
 // Read version from package.json
@@ -275,13 +275,7 @@ export default defineConfig(({ mode }) => {
           });
         }
       },
-      tailwindcss(),
-      {
-        name: 'generate-version-json',
-        writeBundle() {
-          writeFileSync('./dist/version.json', JSON.stringify({ version: packageJson.version }))
-        }
-      }
+      tailwindcss()
     ],
     resolve: {
       alias: {
